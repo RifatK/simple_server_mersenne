@@ -4,14 +4,14 @@ from datetime import datetime
 class MersenneTwister(object):
 
     def __init__(self,client_process_id,num_of_request=1):
-        self.seed = self.generate_seed(client_process_id)
-        self.mt_array = self.init_mersenne_array(self.seed)
-
         self.m_prime=1812433253
         self.dflt_indx = 624
         self.bit_opr = (2 ** 32) -1
         self.counter = 0
         self.num_of_requst = num_of_request
+
+        self.seed = self.generate_seed(client_process_id)
+        self.mt_array = self.init_mersenne_array(self.seed)
 
     def init_mersenne_array(self,seed):
         mt_temp = [0] * self.dflt_indx
@@ -28,7 +28,7 @@ class MersenneTwister(object):
     def rand(self):
         list_of_rand=[]
         for i in range(self.num_of_requst):
-            list_of_rand.append(self.get_random_numner())
+            list_of_rand.append(self.get_random_number())
 
         return self.convert_to_hex(list_of_rand)
 
